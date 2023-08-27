@@ -1,311 +1,1538 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Cap3D</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="static/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Webpage Title</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style type="text/css">
-body{font-family:"Open Sans",Segoe,"Segoe UI","Lucida Sans Unicode","Lucida Grande","Avenir","Seravek","Ubuntu","DejaVu Sans","Trebuchet MS",Verdana,Arial,sans-serif}
-#header{background:#00274C;opacity:0.95;margin:0 auto;padding:50px 0 0;text-align:center;cursor:default;text-align:center}
-#header-container{margin:0 auto;padding: 0 2em;max-width:1000px}
+        .container {
+            padding: 20px;
+        }
 
-#header-container .col-logo{text-align:left}
-#header-container .logo{position:relative;z-index:100;height:50px;margin-top:20px;margin-right:10px}
+        /* Custom styles */
+        .material-list {
+            list-style-type: none;
+            padding: 0;
+        }
 
-#header-container .col-info{text-align:left;margin-bottom:20px}
-#header-container #title{margin:.525em 0 1.525em;font-size:1.6em;font-weight:800;text-align:center}
+        .material-list li {
+            text-transform: capitalize;
+        }
 
-.paper-info{color:#8a8989;display:inline-block;margin:0 auto;text-align:left}
-.paper-info-margin{margin-bottom:20px}
-.paper-info p, .paper-info h3{line-height:1.6em; margin-bottom: 0em}
-.paper-info .title{font-size:16px;color:#FFCB05;font-weight:600}
-.paper-info .authors, .paper-info .authors a{color:#989C97}
-.paper-info .authors_bottom, .paper-info .authors_bottom a{color:#567EAE}
-.paper-info .email{color:#666; font-size:14px}
-.paper-info .tag{margin:auto auto;padding:0;list-style:none;text-align:left}
-.paper-info .tag li{display:inline-block;margin:auto;padding:0 3px 0 0;line-height:10px;color:#567EAE} a{color:#567EAE}
-.paper-info .conference, .paper-info .conference a{color:#FFCB05;font-weight:600}
-.paper-info .top a{color:#989C97}
+        /* Subtle green and grey color theme */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
 
-#wave-canvas{color:#8a8989;display:block;margin:-80px 0 0;width:100%;height:150px}
+        .table th,
+        .table td {
+            border-top: none;
+        }
 
-#content{padding-top:0px;text-align:left;}
-#content-container{margin:0 auto;padding: 0 2em;max-width:1000px;}
+        .table thead th {
+            background-color: #2ECC71;
+            color: white;
+        }
 
-#content-container .header{color:#00274C;background:#FFCB05;padding:15px 30px 5px;border-bottom:3px solid #dddddd}
-#content-container .header .indicator{color:#00274C;margin-right:12px}
+        .table tbody tr:nth-child(odd) {
+            background-color: #E8E8E8;
+        }
 
-#content-container .content{background:#ffffff;padding:15px 5px 15px 30px}
-#content-container .content .caption{color:#989C97}
-#content-container .content .bib{color:#989C97;font-size:14px;}
-#content-container .content .bib pre{margin:0;padding:0;}
-#content-container .content .href{style="color:#567EAE"}
+        .table tbody tr:hover {
+            background-color: #D1F2EB;
+        }
 
+        a {
+            text-decoration: none;
+        }
 
+        .staff-pictures {
+            width: 70%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
 
-#footer{padding:2em 0 0.5em;margin:30px 0 0;background:#ffffff;opacity:0.95;font-size:14px;line-height:12px;text-align:center;color:#989C97}
-.highlight, .highlight a{color:#BB2222;font-weight:600}
+        .profile {
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
+
 <body>
-<div id="main">
-    <div id="header">
-        <div id="header-container" class="container">
-          <div class="row">
-            <div class="col-md-12 col-xl-12 col-info">
-                <h1 id="title"><p style="color:#FFCB05"> Cap3D </p></h1>
-                <div class="paper-info">
-                    <h3 class="title">Scalable 3D Captioning with Pretrained Models
-</h3>
-                    <p class="authors">
-                    <a href="https://tiangeluo.github.io/">Tiange Luo*</a>, <a href="https://tiangeluo.github.io/">Chris Rockwell*</a>, <a href="https://web.eecs.umich.edu/~honglak/">Honglak Lee&#8224;</a>, <a href="https://web.eecs.umich.edu/~justincj/">Justin Johnson&#8224;</a> (*: equal contribution, &#8224;: equal advising)
-                    </p>
-                    <ul class="tag">
-                        <li class="conference"><a href="https://arxiv.org/abs//2306.07279">arXiv 2023</a> </li>
-                        <li class="top"><a href="https://arxiv.org/pdf/2306.07279.pdf">Paper</a> |</li>
-                        <li class="top"><a href="https://github.com/crockwell/Cap3D">Code</a> |</li>
-                        <li class="top"><a href="https://huggingface.co/datasets/tiange/Cap3D">Dataset</a> |</li>
-                        <li class="top"><a href="https://tiangeluo.github.io/projectpages/bibs/cap3d.txt">BibTeX</a> </li>
-                    </ul>
-                </div>
+    <center>
+        <header id="header" class="alt" style="width: 100%">
+            <div class="bgimg" style="height: 160px; background:  #87cfc0">
+                <div style="height: 30px; width: 100%"></div>
+                <h1>
+                    <font size="+5">EECS 542: Advanced Topics in Computer Vision</font>
+                    <div style="height:10px"></div>
+                </h1>
+                <h2>
+                    <font size="+2">
+                        Fall 2023
+                    </font>
+                </h2>
             </div>
-          </div>
+        </header>
+    </center>
 
-        </div>
-        <canvas id="wave-canvas"></canvas>
-    </div>
-    <div id="content">
-        <div id="content-container" class="container">
-            <div class="header"><h4><span class="indicator">=</span>Resources</h4></div>
-            <div class="content">
-                <ul>
-                    <li>Data can be found in <a href="https://huggingface.co/datasets/tiange/Cap3D">[Huggingface]</a>, including descriptive captions for 3D objects in Objaverse and ABO, along with Objaverse's point clouds, rendered images, and Shap-E latent codes.</li>
-                    <li>Our code for rendering, captioning, and finetuning text-to-3D models are released in <a href="https://github.com/crockwell/Cap3D">[Github]</a></li>
-                    <li>Some fine-trained model checkpoints can be found in <a href="https://huggingface.co/datasets/tiange/Cap3D">[Huggingface]</a></a>.</li>
-                    <li>More captioning examples can be found in <a href="https://tiangeluo.github.io/projectpages/imgs/Cap3D/000.html">[Link]</a></a>.</li>
-                    <!--
-                    <li>Training and inference codes  <a href="https://github.com/tiangeluo/">[PyTorch (Official)]</a>.</li>
-                    <li>Used 3D data with part annotations can be downloaded in <a href="https://drive.google.com/">[Google Drive (.zip)]</a>.</li>
-                    <li>Pre-trained models are provided in <a href="https://github.com/tiangeluo/">[Github repo]</a>.</li>
-                    -->
-                </ul>
+    <center>
+        <header class="major">
+            <br><br>
+            <h2> Staff</h2>
+            <body>
+                <section class="staff-pictures">
+                    <div class="profile">
+                        <div class="profile-pic" style="background-color: #FFB6C1;"></div>
+                        <div class="profile-name">John Doe</div>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-pic" style="background-color: #98FB98;"></div>
+                        <div class="profile-name">Jane Smith</div>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-pic" style="background-color: #87CEEB;"></div>
+                        <div class="profile-name">Michael Johnson</div>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-pic" style="background-color: #FFD700;"></div>
+                        <div class="profile-name">Emily Brown</div>
+                    </div>
+                </section>
+            </body>
+        </header>
+        <center>
+
+
+
+            <section class="main">
+                <center>
+                    <br>
+                    <div class="table-wrapper" style="width:50%">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Name</th>
+                                    <th style="text-align:center">Office hours time</th>
+                                    <th style="text-align:center">Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="alternate">
+                                    <td>John Doe</td>
+                                    <td>Tuesday 4:30 - 5:00pm</td>
+                                    <td>BBB vollyball court</td>
+
+                                </tr>
+                                <tr class="alternate">
+                                    <td>Jane Smith </td>
+                                    <td>Thursday 3:00 - 3:30pm </td>
+                                    <td> BBB elevator</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br><br>
+                    </div>
+
+                </center>
+            </section>
+
+
+            <center>
+                <header class="major">
+                    <h2>Course Schedule</h2>
+                </header>
+            </center>
+
+            <div class="container">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="col">Lecture</th>
+                            <th class="col">Date</th>
+                            <th class="col">Topic</th>
+                            <th class="col">Materials</th>
+                            <th class="col">Optional Materials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td>1.0</td>
+                            <td>2023-08-28</td>
+                            <td>Introduction: Image Formation and Overview</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>2.0</td>
+                            <td>2023-08-30</td>
+                            <td>Foundation for Generative Models: </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1312.6114">VAE</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1406.2661">GAN</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="http://proceedings.mlr.press/v37/rezende15.pdf">Normalizing flows</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2006.11239">diffusion models</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>3.0</td>
+                            <td>2023-09-06</td>
+                            <td>Transformers</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2010.11929">ViT</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2105.01601)">MLPmixer</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>4.0</td>
+                            <td>2023-09-11</td>
+                            <td>Language Models</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1810.04805">Bert</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2005.14165">GPT3</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1910.10683">T5</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2203.02155">GPT3.5</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>5.0</td>
+                            <td>2023-09-13</td>
+                            <td>Text and Image</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2103.00020">CLIP</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2201.12086">BLIP</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2301.12597">BLIP2</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2205.01917">COCA</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>6.0</td>
+                            <td>2023-09-18</td>
+                            <td>Segmentation</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2304.02643">SAM</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2005.12872">DETR</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2210.04150">OVSeg</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="DINO">TokenCut</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>7.0</td>
+                            <td>2023-09-20</td>
+                            <td>Image Generative Models</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1912.04958">StyleGAN2</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1711.09020">StarGAN</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>Normalizing Flow</li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1606.05328">PIxelCNN</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>8.0</td>
+                            <td>2023-09-25</td>
+                            <td>Diffusion Models</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2006.11239">DDPM</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2112.10752">LatentDiffusion</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2202.00512">Distillation</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://openreview.net/forum?id=PxTIG12RRHS">SDE explanation</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2207.12598">classfier-free guidance</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>9.0</td>
+                            <td>2023-09-27</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2208.12242">DreamBooth</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2211.09794">NullText-Inversion</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2211.09800">Instructpix2pix</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2304.13348">TextDeformer</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>10.0</td>
+                            <td>2023-10-02</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2003.08934">NeRF</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2203.09517">TensoRF</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2201.05989">Instant-NGP</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2308.04079">3D Gaussian</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>11.0</td>
+                            <td>2023-10-04</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://www.robots.ox.ac.uk/~gk/publications/KleinMurray2007ISMAR.pdf">PTAM</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://demuc.de/papers/schoenberger2016sfm.pdf">Colmap</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="http://phototour.cs.washington.edu/Photo_Tourism.pdf">Phototourism</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://grail.cs.washington.edu/wp-content/uploads/2015/08/goldman-2005-sas.pdf">Shape and spatially-varying brdfs from photometric stereo</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>12.0</td>
+                            <td>2023-10-09</td>
+                            <td>Implicit Representations</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1901.05103">DeepSDF</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2112.04645">BACON</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2006.09661">SIREN</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1802.05384">AtlasNet</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/1812.03828">Occupancy Networks</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>13.0</td>
+                            <td>2023-10-11</td>
+                            <td>3D Generative Models</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2112.07945">EG3D</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2209.14988">DreamFusion</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2209.11163">Get3D</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>nan</td>
+                            <td>2023-10-16</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>14.0</td>
+                            <td>2023-10-18</td>
+                            <td>3D Scene Generation</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2304.02602">GenVS</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2303.12074">CC3D</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2210.04628">3DiM</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2301.09629">LEGO-NET</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2303.11328">zero-123</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>15.0</td>
+                            <td>2023-10-23</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://www.doc.ic.ac.uk/~ajd/Publications/newcombe_etal_iccv2011.pdf">DTAM</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2209.14988">DynamicFusion</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ismar2011.pdf">KinectFusion</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://jakobengel.github.io/pdf/engel14eccv.pdf">LSD-SLAM</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>16.0</td>
+                            <td>2023-10-25</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2106.13228">HyperNeRF</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2308.09713">Dynamic 3D Gaussians</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2210.13445">Monocular Dynamic View Synthesis: A Reality Check</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2205.02904">Neural Jacobian Fields</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>17.0</td>
+                            <td>2023-10-30</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2209.14916">motion diffusion models</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2302.00883">Synthesizing physical character-scene interactions</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2204.03458">Video Diffusion Models</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>18.0</td>
+                            <td>2023-11-01</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2003.12039">RAFT</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2204.04153">PIPs</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf">SIFT</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2104.00680">LoFTR</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li>DKM</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>19.0</td>
+                            <td>2023-11-06</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://people.cs.umass.edu/~elm/congealing/">Congealing</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2007.08032">How CNNs generalizes</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2302.03956">Neural Congealing</a></li>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://arxiv.org/abs/2306.03881">Emergent Correspondence from Image Diffusion</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>20.0</td>
+                            <td>2023-11-08</td>
+                            <td>Project Mid-term Presentation</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>21.0</td>
+                            <td>2023-11-13</td>
+                            <td>learning from videos</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>22.0</td>
+                            <td>2023-11-15</td>
+                            <td>multimodal learning</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>23.0</td>
+                            <td>2023-11-20</td>
+                            <td>Sound and Vision</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>24.0</td>
+                            <td>2023-11-27</td>
+                            <td>2D Recognition</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://dl.acm.org/doi/10.1007/BF00337644">The Internal Representation of Solid Shape with Respect to Vision</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>25.0</td>
+                            <td>2023-11-29</td>
+                            <td>Fine-grained Recognition</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <li><a href="https://ieeexplore.ieee.org/document/5206594">Learning to detect unseen object classes by between-class attribute transfer</a></li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>26.0</td>
+                            <td>2023-12-04</td>
+                            <td>continual learning, few-shot, forgetting</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>27.0</td>
+                            <td>2023-12-06</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>nan</td>
+                            <td>2023-12-07</td>
+                            <td>Project Poster Presentation</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>nan</td>
+                            <td>2023-12-08</td>
+                            <td>nan</td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="material-list">
+                                    
+                                    
+                                    
+                                    
+                                    <li>nan</li>
+                                    
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div id="content-container" class="container">
-            <div class="header"><h4><span class="indicator">=</span>Overview</h4></div>
-            <div class="content">
-            <style>
-                .add-space {
-                    margin-bottom: 20px;
-                }
-            </style>
-            <p>
-                Cap3D provides detailed descriptions of 3D objects by leveraging pretrained models in captioning, alignment, and LLM to consolidate multi-view information. 
-            </p>
 
-            <p>
-                <center>
-                <img width="100%" src="https://tiangeluo.github.io/projectpages/imgs/Cap3D/teaser.png">
-                </center>
-                </p>
-                <p class="caption">
-                <center>
-                Figure 1:  Example captioning results by Cap3D.
-                </center>
-            </p>
-
-            <p class="add-space">
-                <center>
-                <img width="100%" src="https://tiangeluo.github.io/projectpages/imgs/Cap3D/compare.png">
-                </center>
-                </p>
-                <p class="caption">
-                <center>
-                Table 1:  Human evaluations revealed Cap3D surpasses crowdsourced annotation in efficiency, cost, and speed.
-                </center>
-                </p>
-            <p>
-
-            <p>
-                Our proposed method, Cap3D, employs a four-step process. First, we render a set of 2D views for each 3D object. Next, we apply image captioning to achieve preliminary descriptions. As these captions may contain inaccuracies, an image-text alignment model, CLIP, is introduced in the third step to rectify errors. Finally, an LLM is employed to unify captions from various perspectives, creating a comprehensive caption. This process is shown in Figure 2 and detailed below.
-            </p>
-            <p>
-                <center>
-                <img width="100%" src="https://tiangeluo.github.io/projectpages/imgs/Cap3D/method.png">
-                </center>
-                </p>
-                <p class="caption">
-                <center>
-                Figure 2:  Overview of Cap3D pipeline.
-                </center>
-            </p>
-            </div>
-        </div>
-        <!----
-        <div id="content-container" class="container">
-            <div class="header"><h4><span class="indicator">=</span>Results</h4></div>
-            <div class="content">
-            <p>
             <center>
-            <img width="80%" src="https://tiangeluo.github.io/projectpages/imgs/nsc/text2shape_v7.png"/>
-            </center>
-            </p>
-            <p class="caption">
-            <center>
-            Figure 3: Text2PointCloud. Neural Shape Compiler can generate corresponding point clouds to the text prompt with structural details, while the baselines generate inaccurate structures or fewer alignments with the text prompt.
-            </center>
-            </p>
-
-            <p>
-            <center>
-            <img width="80%" src="https://tiangeluo.github.io/projectpages/imgs/nsc/text2shape_pic2.png"/>
-            </center>
-            </p>
-            <p class="caption">
-            <center>
-            Figure 4: Text2PointCloud more results.
-            </center>
-            </p>
-
-            <p>
-                <center>
-                <img width="80%" src="https://tiangeluo.github.io/projectpages/imgs/nsc/shapecaptioning_v4.png"/>
-                </center>
-                </p>
-                <p class="caption">
-                <center>
-                Figure 6: PointCloud2Text. One description per sentence. The shown shapes are from test sets, and Neural Shape Compiler tell their structures well.
-                </center>
-            </p>
-
-            <p>
-                <center>
-                <img width="80%" src="https://tiangeluo.github.io/projectpages/imgs/nsc/shapeprogram_cmp_v5.png"/>
-                </center>
-                </p>
-                <p class="caption">
-                <center>
-                Figure 6: PointCloud2Program. Neural Shape Compiler can well infer programs for the shown shapes of unseen categories and reconstruct shapes in a creative manner (e.g., represent the semicircle leg with bars).
-                </center>
-            </p>
-        -->
-	    <!---------
-            <p>
-            <center>
-            <img width="80%" src="https://tiangeluo.github.io/projectpages/imgs/ltg/result_2.png"/>
-            </center>
-            </p>
-            <p class="caption">
-            <center>
-            Figure 4: Quantitative results.
-            </center>
-            </p>
-	    ------------->
-
-            </div>
-        </div>
+                <header class="major">
+                    <h2>Course information</h2>
+                </header>
+                <div class="spotlight" style="width: 90%; text-align: left">
+                    <div class="content">
 
 
-        <div id="content-container" class="container">
-            <div class="header"><h4><span class="indicator">=</span>Related Publication</h4></div>
-            <div class="content">
-                <div class="paper-info", style="margin-bottom: 15px;">
-                    <h3 class="title">Objaverse: A Universe of Annotated 3D Objects</h3>
-                    <p class="authors_bottom">
-                        Matt Deitke, Dustin Schwenk, Jordi Salvador, Luca Weihs, Oscar Michel, Eli VanderBilt, Ludwig Schmidt, Kiana Ehsani, Aniruddha Kembhavi, Ali Farhadi
-                    </p>
-                    <ul class="tag">
-                        <li class="conference"><a href="https://cvpr2023.thecvf.com/">CVPR 2023</a></a></li>
-                        <li class="body"><a href="https://objaverse.allenai.org/">Project Page</a> </li>
-                    </ul>
+                        <p>This is a seminar-style graduate-level class
+                            covering very recent advances in computer
+                            vision. The main focus of the class will be
+                            on <i>reading and critiquing recent research
+                                papers</i>. In each lecture, you will present
+                            and critique several recent research papers. You
+                            will also explore ideas covered in the course
+                            via a final self-directed project.
+
+                            This class is <i>not</i> intended to be an
+                            introduction to computer vision or deep
+                            learning. There will be no problem sets.
+
+                        </p>
+                        <p><b>Lectures:</b>
+                            <!-- <div style = "padding-left: 4%; margin-top:
+                      -20px"> --> Lectures will take place on Monday
+                            and Wednesday, 3:00 - 4:30pm, either over Zoom
+                            or in person. Since this is a discussion-based
+                            class, <i>your attendance is required</i>.
+                            Missing more than two classes without an excuse
+                            will negatively affect your grade. Recordings
+                            are available on Canvas. We will take attendance
+                            on randomly chosen days.
+
+                            <!-- </div> -->
+                            <br>
+
+                        </p>
+                        <p><b>Attending:</b> You are welcome to participate
+                            in the class <i>either in person or over
+                                Zoom</i>. Lecture recordings will be available
+                            until the end of the course.
+
+                        </p>
+                        <p><b>Prerequisites:</b> This is an advanced
+                            vision course. Students are expected to have
+                            taken an introductory vision course before
+                            enrolling (EECS 442, 504, or equivalent), so
+                            that they will be prepared to read and discuss
+                            recent research.
+
+                            <!-- <div style = "padding-left: 4%"> -->
+                            <!--   <ul style = "margin-top: -25px"> -->
+                            <!--     <li> -->
+
+
+                            <!-- </ul> -->
+                            <!-- </div> --><br>
+
+                        </p>
+                        <p><b>Paper reviews:</b> You'll be required to
+                            submit short paper reviews each week (one per
+                            class), beginning the week of Lecture 2. Your
+                            review should be based on the paper itself, rather
+                            than the discussion. It is therefore
+                            due <i>before</i> the paper is presented in class
+                            (i.e. at 3pm on Monday or Wednesday).
+
+                        </p>
+                        <div style="padding-left: 4%; margin-top: -20px">
+                            <ul>
+                                <li>Summarize the paper. For most papers, this means explaining technical contributions,
+                                    such as
+                                    key mathematical insights, algorithms, and architectures.
+                                </li>
+                                <li>Briefly explain how the paper relates to previous work, and why its contributions
+                                    might be
+                                    (or might not be) important.
+                                </li>
+                                <li>Summarize the key experiments.
+                                </li>
+                                <li>Discuss the paper's shortcomings: e.g. limitations to the methods, unconvincing
+                                    aspects of
+                                    experiments, presentation issues.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <br>
+                        <p>Reviews will be graded as:
+                            ✓+, ✓, ✓−, <b>0</b>. We will
+                            not accept late submissions without a valid
+                            excuse. However, we will <i>drop your 5 lowest
+                                review scores</i>.
+
+                        </p>
+                        <p><b>Q&amp;A:</b> This course has a <a
+                                href="https://piazza.com/umich/winter2022/eecs542">Piazza
+                                forum</a>, where you can ask public questions. We
+                            also appreciate it when you respond to questions
+                            from other students. If you have an important
+                            question that you would prefer to discuss over
+                            email, you may email the course staff
+                            (<a href="eecs542-w22-staff@umich.edu">eecs542-w22-staff@umich.edu</a>),
+                            or you can contact the instructor by email
+                            directly.
+
+
+                        </p>
+                        <p><b>Textbooks:</b> In this class, we'll mostly
+                            be reading research papers, rather than
+                            textbooks. The following might be
+                            useful as reference, though:
+                        </p>
+                        <div style="padding-left: 4%">
+                            <ul style="margin-top: 10px">
+                                <li>Goodfellow, Bengio, Courville. <i>Deep Learning</i>. <a
+                                        href="http://www.deeplearningbook.org/"> (available for free online)</a></li>
+                                <li>Szeliski. <i>Computer Vision: Algorithms and Applications, 2nd edition draft</i> <a
+                                        href="http://szeliski.org/Book/">(available for free online)</a></li>
+                            </ul>
+                        </div>
+                        <div style="padding-left: 1%">
+                            If you have feedback for the author of the Szeliski book draft, please submit it <a
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSeGPpO8rm3tJnYNt2j7U93UQz1_TTx50HBavF6j5cKBh8K6hg/viewform?usp=sf_link">here</a>,
+                            and we'll pass it along!
+                        </div><br>
+
+                        <p><b>Presentations:</b> You will give 1-2
+                            presentations throughout the course (depending on
+                            enrollment). We will distribute one list of papers
+                            during the first week of class, and another a few
+                            weeks into the semester. You will rank the list of
+                            papers, and we will assign one to you. Most
+                            classes will also contain an <i>background</i>
+                            talk, which will provide background
+                            material to help you understand the papers.
+
+                        </p>
+                        <p><b>Peer reviews:</b> Your presentation grade
+                            will in part be based on <i>peer reviews</i> from
+                            other students. You will be randomly assigned to
+                            do peer reviews for 3 papers.
+
+                        </p>
+                        <p><b>GPU computing:</b> For the project, you may
+                            require GPUs to train deep learning models. One
+                            common option is to use <a href="https://colab.research.google.com/">Google
+                                Colab</a>. Please note, however, that the free
+                            version comes with significant limitations
+
+
+                        </p>
+                        <p><b>Grading:</b> Final grades will be computed as follows:
+                            <!-- <div style = "padding-left: 4%; margin-top: -20px"> -->
+                        </p>
+                        <div style="padding-left: 0%; margin-top: -20px">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="alternate" style="border: 1px solid #dddddd">
+                                        <td>Final project </td>
+                                        <td align="right">45%</td>
+                                    </tr>
+                                    <tr class="alternate" style="border: 1px solid #dddddd">
+                                        <td>Reviews </td>
+                                        <td align="right">25%</td>
+                                    </tr>
+                                    <tr class="alternate" style="border: 1px solid #dddddd">
+                                        <td>Class presentations </td>
+                                        <td align="right">20%</td>
+                                    </tr>
+                                    <tr class="alternate" style="border: 1px solid #dddddd">
+                                        <td>Participation and peer reviews </td>
+                                        <td align="right">10%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- </div><br> -->
+
+                            <p><b>Academic integrity:</b> While you are
+                                encouraged to discuss homework assignment with
+                                other students, <i>your programming work must
+                                    be completed individually</i>. You must also
+                                write up your solution on your own. You may not
+                                search for solutions online, or use existing
+                                implementations of the algorithms. Please see
+                                the Michigan engineering
+                                <a href="https://elc.engin.umich.edu/honor-council/">honor
+                                    code</a> for more information.
+
+
+                            </p>
+                            <p><b>Support:</b> The <a href="https://caps.umich.edu/">counseling and
+                                    psychological services center</a> (CAPS) provides
+                                support for a variety of issues, including mental
+                                health and stress.
+
+
+                            </p>
+                        </div>
+                    </div>
                 </div>
+            </center>
 
-                <div class="paper-info", style="margin-bottom: 15px;">
-                    <h3 class="title">ABO: Dataset and Benchmarks for Real-World 3D Object Understanding</h3>
-                    <p class="authors_bottom">
-                        Jasmine Collins, Shubham Goel, Kenan Deng, Achleshwar Luthra, Leon Xu, Erhan Gundogdu, Xi Zhang, Tomas F. Yago Vicente, Thomas Dideriksen, Himanshu Arora, Matthieu Guillaumin, Jitendra Malik
-                    </p>
-                    <ul class="tag">
-                        <li class="conference"><a href="https://cvpr2022.thecvf.com/">CVPR 2022</a></a></li>
-                        <li class="body"><a href="https://amazon-berkeley-objects.s3.amazonaws.com/index.html">Project Page</a> </li>
-                    </ul>
-                </div>
-                <div class="paper-info", style="margin-bottom: 15px;">
-                    <h3 class="title">GPT-4 Technical Report</h3>
-                    <p class="authors_bottom">
-                        OpenAI
-                    </p>
-                    <ul class="tag">
-                        <li class="conference"><a href="https://arxiv.org/abs/2303.08774">arXiv 2023</a></a></li>
-                        <li class="body"><a href="https://arxiv.org/pdf/2303.08774.pdf">Page</a> </li>
-                    </ul>
-                </div>
-                <div class="paper-info", style="margin-bottom: 15px;">
-                    <h3 class="title">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</h3>
-                    <p class="authors_bottom">
-                        Junnan Li, Dongxu Li, Silvio Savarese, Steven Hoi
-                    </p>
-                    <ul class="tag">
-                        <li class="conference"><a href="https://arxiv.org/abs/2301.12597">arXiv 2023</a></a></li>
-                        <li class="body"><a href="https://arxiv.org/pdf/2301.12597.pdf">Page</a> </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer">
-        <p>Thank this <a href="http://nscl.csail.mit.edu/">template</a>. <a href="https://accessibility.umich.edu/">Accessibility</a>. </p>
-    </div>
-    <!----------
-    <div id="footer">
-        <p>Thank this <a href="http://nscl.csail.mit.edu/">template</a> </p>
-    </div>
-    ---------->
-</div>
 
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script type="text/javascript" src="static/js/jquery.color.min.js"></script>
-<script type="text/javascript" src="static/js/wave.js"></script>
-<script type="text/javascript">
-$(function() {
-    targetColor = $("#title").css("color")
-    animatedLink = function(speed) {
-        $(".link-li").hover(function() {
-            $(this).find('.icon').animate({
-                color: targetColor,
-                borderColor: targetColor
-            }, speed);
-            $(this).find('.caption').animate({
-                color: '#798350'
-            })
-        }, function() {
-            $(this).find('.icon').animate({
-                borderColor: '#cccccc',
-                color: '#cccccc'
-            }, speed);
-            $(this).find('.caption').animate({
-                color: '#cccccc'
-            })
-        })
-    };
-    // fullBg();
-    animatedLink(400)
-});
-</script>
+            <!-- Include Bootstrap JS and Popper.js for dropdowns -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
