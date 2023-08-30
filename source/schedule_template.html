@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EECS 542</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+
+        .material-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .material-list li {
+            text-transform: capitalize;
+        }
+
+        .table {
+            border-collapse: separate;
+        }
+
+        .table th,
+        .table td {
+            border-top: none;
+        }
+
+        .table thead th {
+            background-color: #c1dcf3a0;
+            color: rgb(0, 0, 0);
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #959fd0;
+        }
+
+        .table tbody tr:hover {
+            background-color: #959fd0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <header id="header" class="alt" style="width: 100%">
+            <div class="bgimg" style="height: 80px; background:  #c1dcf3a0">
+                <div style="height: 30px; width: 100%"></div>
+                <h1>
+                    <font size="+3">EECS 542: Advanced Topics in Computer Vision</font>
+                    <div style="height:10px"></div>
+                </h1>
+            </div>
+        </header>
+    </center>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"
+        style="padding-top: 5px; padding-bottom: 5px; height: 50px;">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav text-center" style="margin: auto;">
+                    <li class="nav-item" style="margin-right: 30px;">
+                        <a class="nav-link fs-5" href="index.html">Course Info</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 30px;">
+                        <a class="nav-link fs-5" href="schedule.html">Schedule</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 30px;">
+                        <a class="nav-link fs-5" href="#piazza">Piazza</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 30px;">
+                        <a class="nav-link fs-5" href="#gradescope">Gradescope</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col">#</th>
+                    <th class="col">Date</th>
+                    <th class="col">Topic</th>
+                    <th class="col">Readings</th>
+                    <th class="col">Optional Readings</th>
+                    <th class="col">Presentation</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, row in data.iterrows() %}
+                <tr>
+                    <td>{{ row['Lecture #'] }}</td>
+                    <td>{{ row['Date'] }}</td>
+                    <td>{{ row['Subject'] }}</td>
+                    <td>
+                        <ul class="material-list">
+                            {% for material in row['materials'].split(', ') %}
+                            {% set parts = material.split(' (') %}
+                            {% set name = parts[0] %}
+                            {% if parts|length > 1 %}
+                            {% set link = parts[1][:-1] %}
+                            <li><a href="{{ link }}">{{ name }}</a></li>
+                            {% else %}
+                            <li>{{ name }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="material-list">
+                            {% for material in row['optional materials'].split(', ') %}
+                            {% set parts = material.split(' (') %}
+                            {% set name = parts[0] %}
+                            {% if parts|length > 1 %}
+                            {% set link = parts[1][:-1] %}
+                            <li><a href="{{ link }}">{{ name }}</a></li>
+                            {% else %}
+                            <li>{{ name }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="material-list">
+                            {% for material in row['Presentations'].split(', ') %}
+                            {% set parts = material.split(' (') %}
+                            {% set name = parts[0] %}
+                            {% if parts|length > 1 %}
+                            {% set link = parts[1][:-1] %}
+                            <li><a href="{{ link }}">{{ name }}</a></li>
+                            {% else %}
+                            <li>{{ name }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js for dropdowns -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
