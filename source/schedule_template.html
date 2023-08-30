@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .container {
             padding: 20px;
         }
@@ -113,7 +113,14 @@
                 <tr>
                     <td>{{ row['Lecture #'] }}</td>
                     <td>{{ row['Date'] }}</td>
-                    <td>{{ row['Subject'] }}</td>
+                    <td>
+                        {% set subject = row['Subject'] %}
+                        {% if subject.endswith('*') %}
+                        <span style="color: red;">{{ subject[:-1] }}</span>
+                        {% else %}
+                        {{ subject }}
+                        {% endif %}
+                    </td>
                     <td>
                         <ul class="material-list">
                             {% for material in row['materials'].split(', ') %}
